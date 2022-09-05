@@ -30,7 +30,6 @@ else{
 }
 let fontsize=document.querySelector(".fontsize input")
 fontsize.onclick=function(){
-    console.log(fontsize.value)
     noteSpace.style.fontSize=(fontsize.value).toString()+"px";
 }
 
@@ -51,7 +50,6 @@ function activeColorFunction(selectedColor){
         selectedColor.currentTarget.classList.add("activeColor");
         noteSpace.style.color=selectedColor.currentTarget.dataset.color
 
-        console.log("bashar")
 
 
     }
@@ -66,9 +64,11 @@ if (localStorage.getItem("file")) {
 let file=document.querySelector(".files");
 addButton.onclick=function(){
   if(Savetext().title!="" ||Savetext().title!=undefined){
-    if(arrayoftextfiles.length!=0 && Savetext()){
+    if(arrayoftextfiles.length!=0 ){
+    
     for(let i=0;i<arrayoftextfiles.length;i++){
         if(arrayoftextfiles[i].title!=Savetext().title){
+            
    arrayoftextfiles.push(Savetext());
     }
     else{
@@ -76,13 +76,17 @@ addButton.onclick=function(){
 
     }
 }}
+else{
+    arrayoftextfiles.push(Savetext());
+
+}
+  }
 
   
-
  addElmentTolist(arrayoftextfiles)
   addToLocalStorage(arrayoftextfiles)
   window.location.reload()
-}
+  
 }
 function Savetext(){
     let filetext={
@@ -148,8 +152,6 @@ let deleteButton=document.querySelectorAll(".delete")
 deleteButton.forEach((e)=>{
 
     e.onclick=function(e){
-        console.log(e.currentTarget.parentElement.parentElement)
-console.log(arrayoftextfiles)
    e.currentTarget.parentElement.parentElement.remove()
    
    deleteTextfromLocal(e.currentTarget.parentElement.parentElement.id)
@@ -178,7 +180,6 @@ editButtonfun(e.currentTarget.parentElement.parentElement.id)
 function editButtonfun(id){
     for(let i=0; i<arrayoftextfiles.length;i++){
     if(arrayoftextfiles[i].title==id){
-        console.log(arrayoftextfiles[i])
         noteSpace.style.textAlign=arrayoftextfiles[i].noteSpacePos
         noteSpace.style.fontStyle=arrayoftextfiles[i].noteSpacestyle
         noteSpace.style.fontSize=arrayoftextfiles[i].noteSpacefSize
@@ -207,7 +208,7 @@ function editButtonfun(id){
             options[0].classList.remove("activeoption")
 
         }
-        if(noteSpace.style.textAlign="center"){
+        if(noteSpace.style.textAlign=="center"){
             options[1].classList.add("activeoption")
          
              }
@@ -250,7 +251,6 @@ pasteButton.onclick= function(){
    .then(txt=>{
     noteSpace.value+=txt;
    })
-    console.log("pasted")
 }
 /////////////////////
 
