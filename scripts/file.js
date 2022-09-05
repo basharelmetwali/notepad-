@@ -65,11 +65,10 @@ if (localStorage.getItem("file")) {
   }
 let file=document.querySelector(".files");
 addButton.onclick=function(){
-  if(Savetext().title!="" ||Savetext().tite!=undefined){
+  if(Savetext().title!="" ||Savetext().title!=undefined){
     if(arrayoftextfiles.length!=0 && Savetext()){
     for(let i=0;i<arrayoftextfiles.length;i++){
-        if(!(arrayoftextfiles[i].title==Savetext().title)){
-            console.log("enter")
+        if(arrayoftextfiles[i].title!=Savetext().title){
    arrayoftextfiles.push(Savetext());
     }
     else{
@@ -77,11 +76,8 @@ addButton.onclick=function(){
 
     }
 }}
-else{
-    arrayoftextfiles.push(Savetext());
 
-}
-
+  
 
  addElmentTolist(arrayoftextfiles)
   addToLocalStorage(arrayoftextfiles)
@@ -285,7 +281,6 @@ document.querySelector(".undo").onclick=function(){
 setInterval(function(){
     if(noteSpace.value!=savedText[current]){
         current++
-        console.log(current)
         savedText.push(noteSpace.value)
 
     }
